@@ -4,7 +4,7 @@
  * Return : returnt zero
  */
 
-int _putchar(char a)
+int main(char a)
 {
 	_putchar('_');
 	_putchar('p');
