@@ -1,1 +1,1 @@
-This for C
+This file about pointers, arrays and strings
