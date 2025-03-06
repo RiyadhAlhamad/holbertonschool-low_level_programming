@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "main.h"
+#include <ctype.h>
 
 /**
  * main - Entry point
@@ -13,15 +13,17 @@ int main(int argc, char *argv[])
 	int i, sum = 0;
 	char *endptr;
 
-	if (argc < 2)
+	if (argc == 1)  /* If no numbers are passed, return 0 */
 	{
-		printf("Error\n");
-		return (1);
+		printf("0\n");
+		return (0);
 	}
 	for (i = 1; i < argc; i++)
 	{
+		/* Use strtol to validate that each argument is a valid number */
 		strtol(argv[i], &endptr, 10);
 
+		/* If endptr does not point to the end of the string, invalid input */
 		if (*endptr != '\0')
 		{
 			printf("Error\n");
