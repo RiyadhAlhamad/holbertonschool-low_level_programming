@@ -1,4 +1,4 @@
-include "main.h"
+#include "main.h"
 
 /**
  * _calloc - allocate memory for an array
@@ -7,7 +7,7 @@ include "main.h"
  * Return: pointer string
  */
 
-char *_calloc(unsigned int nmemb, unsigned int size)
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	unsigned int i;
 	char *p;
