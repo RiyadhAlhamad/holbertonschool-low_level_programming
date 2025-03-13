@@ -7,7 +7,7 @@ include "main.h"
  * Return: pointer string
  */
 
-void *_calloc(unsigned int nmemb, unsigned int size)
+char *_calloc(unsigned int nmemb, unsigned int size)
 {
 	unsigned int i;
 	char *p;
