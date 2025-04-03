@@ -4,6 +4,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/**
+ * struct list_s - Struct for a singly linked list
+ * @str: String data stored in the node
+ * @len: Length of the string
+ * @next: Pointer to the next node
+ *
+ * Description: Structure defining a singly linked list node
+ */
+
 typedef struct list_s
 {
 	char *str;
