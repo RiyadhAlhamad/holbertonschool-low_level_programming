@@ -34,7 +34,7 @@ int main(int ac, char **av)
     if (fdToo == -1)
     {
         dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-        exit(99);  // يمكن أن يبقى هنا أو يتم تغييره إلى 98 حسب المتطلبات
+        exit(99);
     }
 
     while ((readed = read(fdFrum, buff, 1024)) > 0)
@@ -43,7 +43,7 @@ int main(int ac, char **av)
         if (wrote == -1)
         {
             dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-            exit(99); // راجع هذه القيم أيضًا
+            exit(99);
         }
     }
 
