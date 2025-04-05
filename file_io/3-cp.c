@@ -16,7 +16,7 @@
  */
 int main(int argc, char **argv)
 {
-	int from,to,r,w;
+	int from,to;
 	char buffer[1024];
 	ssize_t n_read,n_written;
 
