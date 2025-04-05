@@ -1,72 +1,50 @@
 #include "lists.h"
-#include <stdlib.h>
-
 /**
- * delete_node_at_head - deletes the head node of the list
- * @head: double pointer to the head of the doubly linked list
- *
- * Return: 1 if succeeded, -1 if failed
+ * delete_dnodeint_at_index - deletes node in list
+ * @head: head of address
+ * @index: index to delete
+ * Return: success or fail
  */
-int delete_node_at_head(dlistint_t **head)
+int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-    dlistint_t *temp;
+	dlistint_t *tmp;
+	unsigned int dex = 0;
 
-    if (*head == NULL)
-    {
-        return (-1);
-    }
-
-    temp = *head;
-
-    *head = temp->next;
-    if (*head != NULL)
-    {
-        (*head)->prev = NULL;
-    }
-
-    free(temp);
-    return (1);
-}
-
-/**
- * delete_node_at_index - deletes a node at a specific index
- * @head: double pointer to the head of the doubly linked list
- * @index: index of the node to be deleted
- *
- * Return: 1 if succeeded, -1 if failed
- */
-int delete_node_at_index(dlistint_t **head, unsigned int index)
-{
-    dlistint_t *current;
-    unsigned int i;
-
-    current = *head;
-
-    for (i = 0; current != NULL && i < index; i++)
-    {
-        current = current->next;
-    }
-
-    if (current == NULL)
-    {
-        return (-1);
-    }
-
-    if (current == *head)
-    {
-        return (delete_node_at_head(head));
-    }
-
-    if (current->prev != NULL)
-    {
-        current->prev->next = current->next;
-    }
-
-    if (current->next != NULL)
-    {
-        current->next->prev = current->prev;
-    }
-
-    free(current);
-    return (1);
+	if ((*head) == NULL)
+		return (-1);
+	if (index == 0)
+	{
+		if ((*head)->next != NULL)
+		{
+			free(*head);
+			*head = (*head)->next;
+			(*head)->prev = NULL;
+			return (1);
+		}
+		free(*head);
+		(*head) = NULL;
+		return (1);
+	}
+	tmp = *head;
+	while (tmp->next && dex != index)
+	{
+		dex++;
+		tmp = tmp->next;
+	}
+	if (dex == index)
+	{
+		if (tmp->next != NULL)
+		{
+			tmp->next->prev = tmp->prev;
+			tmp->prev->next = tmp->next;
+			free(tmp);
+		}
+		else
+		{
+			tmp->prev->next = NULL;
+			free(tmp);
+		}
+		return (1);
+	}
+	return (-1);
 }
