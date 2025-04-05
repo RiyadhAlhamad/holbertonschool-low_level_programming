@@ -9,12 +9,14 @@
  */
 int delete_node_at_head(dlistint_t **head)
 {
+    dlistint_t *temp;
+
     if (*head == NULL)
     {
         return (-1);
     }
 
-    dlistint_t *temp = *head;
+    temp = *head;
 
     *head = temp->next;
     if (*head != NULL)
