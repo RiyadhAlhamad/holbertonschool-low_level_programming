@@ -1,49 +1,58 @@
-#include <stdlib.h>
 #include "lists.h"
+#include <stdlib.h>
 
 /**
- * delete_dnodeint_at_index - Deletes the node at index index of a doubly linked list
- * @head: Double pointer to the head of the list
- * @index: Index of the node to delete
- * 
- * Return: 1 if succeeded, -1 if it failed
+ * delete_dnodeint_at_index - deletes the node at index index of a doubly linked list
+ * @head: double pointer to the head of the doubly linked list
+ * @index: index of the node to be deleted
+ *
+ * Return: 1 if succeeded, -1 if failed
  */
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-    dlistint_t *current = *head;
-    unsigned int i = 0;
+    dlistint_t *current;
+    unsigned int i;
 
-    if (current == NULL)  // Case when the list is empty
-        return (-1);
-
-    // Deleting the head node
-    if (index == 0)
+    if (*head == NULL)
     {
-        *head = current->next;
-        if (current->next != NULL)
-            current->next->prev = NULL;
-        free(current);
-        return (1);
+        return (-1);
     }
 
-    // Traverse the list to find the node to delete
-    while (current != NULL && i < index)
+    current = *head;
+
+    /* Traverse the list to find the node at the specified index */
+    for (i = 0; current != NULL && i < index; i++)
     {
         current = current->next;
-        i++;
     }
 
-    // If the node doesn't exist
-    if (current == NULL)
+    if (current == NULL)  /* Case when the index is out of range */
+    {
         return (-1);
+    }
 
-    // Adjust the previous node to skip the current node
-    if (current->next != NULL)
-        current->next->prev = current->prev;
+    /* If the node to be deleted is the head of the list */
+    if (current == *head)
+    {
+        *head = current->next;
+        if (*head != NULL)
+        {
+            (*head)->prev = NULL;
+        }
+    }
+    else
+    {
+        /* Update the previous and next pointers of the surrounding nodes */
+        if (current->prev != NULL)
+        {
+            current->prev->next = current->next;
+        }
 
-    // Adjust the next node of the previous node
-    if (current->prev != NULL)
-        current->prev->next = current->next;
+        if (current->next != NULL)
+        {
+            current->next->prev = current->prev;
+        }
+    }
 
     free(current);
     return (1);
